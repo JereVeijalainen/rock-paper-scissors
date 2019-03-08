@@ -12,7 +12,6 @@ export class AppComponent {
   opponentText: string;
   resultText: string;
 
-
   startGame() {
     this.gameStarted = true;
     this.initializeGame();
@@ -40,23 +39,18 @@ export class AppComponent {
     return randomItem(items);
   }
 
-  getResult(playerItem, opponentItem) {
+  getResult(playerItem: string, opponentItem: string): string {
 
     if (playerItem === opponentItem) {
       return 'Tie';
     }	else {
       let win = false;
-
-      switch (playerItem) {
-        case 'rock':
-          opponentItem === 'scissors' ? win = true : win = false;
-          break;
-        case 'paper':
-          opponentItem === 'rock' ? win = true : win = false;
-          break;
-        case 'scissors':
-          opponentItem === 'paper' ? win = true : win = false;
-          break;
+      if (playerItem === 'rock') {
+        win = opponentItem === 'scissors' ? true : false;
+      } else if (playerItem === 'paper') {
+        win = opponentItem === 'rock' ? true : false;
+      } else if (playerItem === 'scissors') {
+        win = opponentItem === 'paper' ? true : false;
       }
       return win ? 'You won' : 'You lost';
     }

@@ -5,7 +5,8 @@
 </div>
 
 <div>
-	<button (click)="startGame()">Start The Game</button>
+	<button *ngIf="!gameStarted" (click)="startGame()">Start Game</button>
+	<button *ngIf="gameStarted" (click)="endGame()">End Game</button>
 </div>
 <div *ngIf="gameStarted">
 	<h2>Choose</h2>
@@ -15,7 +16,9 @@
 		<button (click)="chooseItem('scissors')">Scissors</button>
 	</div>
 	<div>
-		{{resultText}}
+		<h3>{{playerText}}</h3>
+		<h3>{{opponentText}}</h3>
+		<h3>{{resultText}}</h3>
 	</div>	
 </div>
 

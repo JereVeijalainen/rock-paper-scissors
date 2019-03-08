@@ -6,52 +6,63 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	title = 'Welcome to Rock Paper Scissors Game';
-	gameStarted = false;
-	playerItem: string;
-	opponentItem: string;
-	resultText: string;
+  title = 'Rock Paper Scissors Game';
+  gameStarted = false;
+  playerText: string;
+  opponentText: string;
+  resultText: string;
 
 
-	startGame() {
-		this.gameStarted = true;
-	}
+  startGame() {
+    this.gameStarted = true;
+    this.initializeGame();
+  }
 
-	endGame() {
-		this.gameStarted = false;
-	}
+  endGame() {
+    this.gameStarted = false;
+  }
 
-	chooseItem(item: string) {
-		const opponentItem = this.chooseOpponentItem();		
-		this.resultText = `You chose ${item}. Your opponent chose ${opponentItem}. Result: ${this.getResult(item, opponentItem)}.`;	
-	}
+  initializeGame() {
+    this. playerText = '';
+    this. opponentText = '';
+    this. resultText = '';
+  }
 
-	chooseOpponentItem(): string {
-		const items = ['rock', 'paper', 'scissors'];
-		return this.randomItem(items);
-	}
+  chooseItem(item: string) {
+    const opponentItem = this.chooseOpponentItem();
+    this.playerText = `You chose: ${item}`;
+    this.opponentText = `Your opponent chose: ${opponentItem}`;
+    this.resultText = `Result: ${this.getResult(item, opponentItem)}`;
+  }
 
-	randomItem(items) {		
-		return items[Math.floor(Math.random() * items.length)];		
-	}
+  chooseOpponentItem(): string {
+    const items = ['rock', 'paper', 'scissors'];
+    return randomItem(items);
+  }
 
-	getResult(playerItem, opponentItem) {
-		var win = false;
+  getResult(playerItem, opponentItem) {
 
-		if (playerItem === opponentItem) {
-			return 'Tie';
-		}
-		else {
-			switch (playerItem) {
-				case 'rock':
-					opponentItem === "scissors" ? win = true : win = false;
-				case 'paper':
-					opponentItem === "rock" ? win = true : win = false;
-				case 'scissors':
-					opponentItem === "paper" ? win = true : win = false;
-			}
-			return win ? 'You win' : 'You lose';
-		}
+    if (playerItem === opponentItem) {
+      return 'Tie';
+    }	else {
+      let win = false;
 
-	}
+      switch (playerItem) {
+        case 'rock':
+          opponentItem === 'scissors' ? win = true : win = false;
+          break;
+        case 'paper':
+          opponentItem === 'rock' ? win = true : win = false;
+          break;
+        case 'scissors':
+          opponentItem === 'paper' ? win = true : win = false;
+          break;
+      }
+      return win ? 'You won' : 'You lost';
+    }
+  }
+}
+
+function randomItem(items) {
+  return items[Math.floor(Math.random() * items.length)];
 }
